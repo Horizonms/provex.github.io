@@ -1,0 +1,66 @@
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Obtener Ubicación Precisa - Reporte</title>
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+    <link rel="stylesheet" href="style.css">
+    <script type="importmap">
+      {
+        "imports": {
+          "leaflet": "https://unpkg.com/leaflet@1.9.4/dist/leaflet-src.esm.js"
+        }
+      }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div id="userInfoForm">
+            <h2>Información del Contrato</h2>
+            <form id="contractForm">
+                <div class="form-group">
+                    <label for="userName">Nombre Completo:</label>
+                    <input type="text" id="userName" name="userName" required>
+                </div>
+                <div class="form-group">
+                    <label for="userId">Número de Cédula:</label>
+                    <input type="text" id="userId" name="userId" required>
+                </div>
+                <div class="form-group">
+                    <label for="userPhone">Número de Teléfono:</label>
+                    <div class="phone-input-container">
+                        <input type="text" id="countryCode" name="countryCode" value="+58" readonly>
+                        <input type="tel" id="userPhone" name="userPhone" placeholder="Ej: 4121234567" required pattern="^[1-9]\d{7,14}$" title="Solo números. Ej: 4121234567">
+                    </div>
+                    <small>Incluye el resto de tu número telefónico. Ej: 4121234567</small>
+                </div>
+                 <div id="formError" class="error-message" style="display: none; margin-bottom: 15px;"></div>
+                <button type="submit" id="submitUserInfoBtn">Continuar a Ubicación</button>
+            </form>
+        </div>
+
+        <div id="locationSection" style="display: none;">
+             <h1 id="locationTitle">Obtener Ubicación</h1>
+             <button id="getLocationBtn">Obtener Ubicación Actual</button>
+             <div id="locationInfo">
+                 <p id="status">Presiona el botón para obtener tu ubicación.</p>
+                 <p><strong>Coordenadas:</strong> <span id="coordinates">-</span></p>
+                 <p><strong>Precisión:</strong> <span id="accuracy">-</span> metros</p>
+                 <!-- Map container -->
+                 <div id="map"></div>
+                 <button id="shareBtn" class="share-button" style="display: none;">Compartir Reporte por WhatsApp</button>
+                 <p class="note">Nota: La precisión depende del dispositivo, el entorno (edificios, cielo despejado) y el método de geolocalización (GPS, Wi-Fi, redes móviles). La precisión a nivel de centímetros <strong>no</strong> es posible con navegadores estándar y hardware de consumo.</p>
+             </div>
+             <div id="errorInfo" class="error-message" style="display: none;"></div>
+        </div>
+    </div>
+
+    <button id="restartBtn" style="display: none; margin-top: 20px;">Iniciar Nuevo Reporte</button>
+
+    <!-- Leaflet JS (loaded as module) -->
+    <script type="module" src="script.js"></script>
+</body>
+</html>
